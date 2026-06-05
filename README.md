@@ -92,8 +92,8 @@ carbon360/
 * Monitoramento de queimadas
 
 ## Equipe
-Alex Junior
-Felipe Alves
-Isabella Heder
+- Alex Junior
+- Felipe Alves
+- Isabella Heder
 
 Projeto desenvolvido para a Global Solution FIAP com foco em inovação, sustentabilidade e tecnologia aplicada à gestão ambiental.
