@@ -14,6 +14,8 @@ A solução utiliza uma arquitetura moderna de dados baseada em Data Lakehouse, 
 * Apoiar análises para tomada de decisão baseada em dados.
 * Disponibilizar informações confiáveis para acompanhamento de métricas ESG.
 
+<img width="1536" height="1024" alt="Carbon360 - Arquitetura de dados" src="https://github.com/user-attachments/assets/b9b57424-0383-409c-830d-5593a79ec203" />
+
 ## Fontes de Dados
 
 O projeto integra dados provenientes de diferentes organizações e plataformas, incluindo:
