@@ -1,0 +1,87 @@
+resources:
+  jobs:
+    Carbon360:
+      name: Carbon360
+      schedule:
+        quartz_cron_expression: 55 0 6 * * ?
+        timezone_id: America/Sao_Paulo
+        pause_status: UNPAUSED
+      tasks:
+        - task_key: metadata_uf_coordernadas
+          notebook_task:
+            notebook_path: /Workspace/Users/rm562679@fiap.com.br/Global Solution -
+              Carbon360/UF - Coordenadas
+            source: WORKSPACE
+        - task_key: GBIF_Bio
+          depends_on:
+            - task_key: metadata_uf_coordernadas
+          notebook_task:
+            notebook_path: /Workspace/Users/rm562679@fiap.com.br/Global Solution -
+              Carbon360/GBIF/GBIF Global Biodiversity Info. Facility
+            source: WORKSPACE
+        - task_key: IBGE_UFs
+          depends_on:
+            - task_key: metadata_uf_coordernadas
+          notebook_task:
+            notebook_path: /Workspace/Users/rm562679@fiap.com.br/Global Solution -
+              Carbon360/IBGE/IBGE - Estados (UFs)
+            source: WORKSPACE
+        - task_key: IBGE_Municipios
+          depends_on:
+            - task_key: IBGE_UFs
+          notebook_task:
+            notebook_path: /Workspace/Users/rm562679@fiap.com.br/Global Solution -
+              Carbon360/IBGE/IBGE - Munícipios
+            source: WORKSPACE
+        - task_key: Sentinel_NDVI
+          depends_on:
+            - task_key: metadata_uf_coordernadas
+          notebook_task:
+            notebook_path: /Workspace/Users/rm562679@fiap.com.br/Global Solution -
+              Carbon360/Satélites/Sentinel-2 - NDVI
+            source: WORKSPACE
+        - task_key: Landsat_NASA
+          depends_on:
+            - task_key: Sentinel_NDVI
+          notebook_task:
+            notebook_path: /Workspace/Users/rm562679@fiap.com.br/Global Solution -
+              Carbon360/Satélites/Landsat (NASA)
+            source: WORKSPACE
+        - task_key: inpe_queimadas_bronze
+          depends_on:
+            - task_key: metadata_uf_coordernadas
+          notebook_task:
+            notebook_path: /Workspace/Users/rm562679@fiap.com.br/Global Solution -
+              Carbon360/INPE - Queimadas/INPE Queimadas - Bronze layer
+            source: WORKSPACE
+        - task_key: open_meteo_bronze
+          depends_on:
+            - task_key: metadata_uf_coordernadas
+          notebook_task:
+            notebook_path: /Workspace/Users/rm562679@fiap.com.br/Global Solution -
+              Carbon360/Open-Meteo Historical Weather API/Open-Meteo Bronze
+              layer
+            source: WORKSPACE
+        - task_key: open_meteo_silver
+          depends_on:
+            - task_key: open_meteo_bronze
+          notebook_task:
+            notebook_path: /Workspace/Users/rm562679@fiap.com.br/Global Solution -
+              Carbon360/Open-Meteo Historical Weather API/Open-Meteo Silver
+              layer
+            source: WORKSPACE
+        - task_key: open_meteo_gold
+          depends_on:
+            - task_key: open_meteo_silver
+          notebook_task:
+            notebook_path: /Workspace/Users/rm562679@fiap.com.br/Global Solution -
+              Carbon360/Open-Meteo Historical Weather API/Open-Meteo Gold layer
+            source: WORKSPACE
+        - task_key: Projects_Verra
+          notebook_task:
+            notebook_path: /Workspace/Users/rm562679@fiap.com.br/Global Solution -
+              Carbon360/Verra/Projetos Verra
+            source: WORKSPACE
+      queue:
+        enabled: true
+      performance_target: PERFORMANCE_OPTIMIZED
